@@ -1,0 +1,161 @@
+:root {
+  --negro: #0d0b0a;
+  --rojo: #c1121f;
+  --rojo-vivo: #e63a22;
+  --crema: #f1e9d6;
+}
+* { box-sizing: border-box; }
+
+/* ===== Cielo rojo con sol (estilo portada western) ===== */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  color: var(--negro);
+  background:
+    radial-gradient(circle at 50% 170px, var(--rojo-vivo) 0 130px, transparent 131px),
+    linear-gradient(180deg, #4a0408 0%, #a50c14 35%, #d12a1c 100%);
+  background-attachment: fixed;
+}
+
+/* Silueta negra de mesetas al fondo */
+body::after {
+  content: "";
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 24vh;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--negro);
+  clip-path: polygon(0 100%, 0 62%, 6% 62%, 9% 38%, 17% 38%, 20% 58%, 29% 58%, 32% 70%,
+                     41% 70%, 44% 30%, 52% 30%, 55% 55%, 64% 55%, 67% 72%, 76% 72%,
+                     79% 40%, 88% 40%, 91% 60%, 100% 60%, 100% 100%);
+}
+body > * { position: relative; z-index: 1; }
+
+/* ===== Cabecera ===== */
+.cartel {
+  padding: 56px 20px 40px;
+  text-align: center;
+}
+.sobretitulo {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: .4em;
+  color: var(--crema);
+}
+.cartel h1 {
+  margin: 8px 0 12px;
+  font-family: "Rye", serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 5.4rem);
+  line-height: 1;
+  color: var(--negro);
+  text-shadow: 4px 4px 0 var(--crema);
+}
+.lema {
+  display: inline-block;
+  margin: 0;
+  padding: 8px 20px;
+  font-size: 1.05rem;
+  letter-spacing: .06em;
+  color: var(--crema);
+  background: var(--negro);
+}
+
+/* ===== Estado (carga / error) ===== */
+.estado {
+  width: min(560px, calc(100% - 32px));
+  margin: 0 auto 28px;
+  padding: 14px 18px;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--crema);
+  background: var(--negro);
+}
+.estado:empty { display: none; }
+.estado.error {
+  color: var(--negro);
+  background: var(--crema);
+  border: 4px solid var(--negro);
+}
+
+/* ===== Productos como carteles ===== */
+.grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+}
+.producto {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: var(--crema);
+  border: 4px solid var(--negro);
+  box-shadow: 8px 8px 0 var(--negro);
+  transition: transform .15s, box-shadow .15s;
+}
+.producto:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 var(--negro);
+}
+
+.foto {
+  height: 200px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid var(--negro);
+  padding-bottom: 12px;
+}
+.foto img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+}
+.categoria {
+  margin: 0 0 6px;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--rojo);
+}
+.nombre {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.precio {
+  margin: auto 0 0;
+  align-self: flex-start;
+  padding: 2px 14px;
+  font-family: "Rye", serif;
+  font-size: 1.35rem;
+  color: var(--crema);
+  background: var(--rojo);
+  border: 3px solid var(--negro);
+}
+
+footer {
+  padding: 24px 20px calc(24vh + 16px);
+  text-align: center;
+  font-size: .9rem;
+  letter-spacing: .1em;
+  color: var(--crema);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .producto { transition: none; }
+}
